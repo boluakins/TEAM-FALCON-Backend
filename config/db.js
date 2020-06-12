@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const uri = 'mongodb+srv://boluakins:%40Akinsola1@cluster0-wounk.mongodb.net/general?retryWrites=true&w=majority'
+const uri = process.env.MONGO_URI 
 
 const options = {
   useNewUrlParser: true,
@@ -9,9 +9,10 @@ const options = {
 };
 
 function initializeDB() {
-  mongoose.connect(uri, options)
-    .then(() => console.log(':: Connected to database'))
-    .catch(error => console.log(":: Couldn't connect to database ", error));
-};
+  mongoose
+    .connect(uri, options)
+    .then(() => console.log(":: Connected to database"))
+    .catch((error) => console.log(":: Couldn't connect to database ", error));
+}
 
-module.exports = initializeDB
+module.exports = initializeDB;
